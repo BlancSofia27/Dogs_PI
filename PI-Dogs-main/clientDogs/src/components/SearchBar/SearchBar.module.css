@@ -1,0 +1,59 @@
+/* COLOR DE LA BOX EN DONDE BUSCAS RECETAS */
+.searchbar input {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.8);
+    /* margin-top: 11%; */
+    margin: 0;
+    border: none;
+
+}
+
+/* COLOR DEL BOTON SEARCH */
+.searchbar button {
+    font-family: sans-serif;
+    font-style: normal;
+    cursor: pointer;
+    transition: .2s;
+    border: none;
+    background-color: white;
+    color: #383838;
+    font-size: 16px;
+    /* margin-top: 11%; */
+    margin: 0;
+    border-radius: 30px;
+    /* font-weight: bold; */
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* COLOR CUANDO PASAS EL CURSOR SOBRE EL BOTON SEARCH */
+.searchbar button:hover {
+    transform: translate(0, .5px);
+    border: none;
+    background-color: #ffffff;
+    color: #000;
+    /* font-size: 20px; */
+}
+
+.searchbar input:focus {
+    outline: none;
+    background-color: transparent;
+}
+
+.todo {
+    background-color: #fda01d;
+    border-radius: 40px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    width: 320px;
+}
+
+/* .searchbar {
+    display: flex;
+} */

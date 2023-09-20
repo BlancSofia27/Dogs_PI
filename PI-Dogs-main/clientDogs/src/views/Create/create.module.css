@@ -1,0 +1,175 @@
+.layout{
+  width: 100%;
+  height: 100%;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: rgba(100, 100, 99, 0.385);
+  background-image: url('../../images/bone.svg');
+}
+
+.layout h1{
+  font-family: doguitos;
+  font-weight: bolder;
+  margin-bottom: 0;
+}
+
+.form{
+  width: 80%;
+  max-width: 30rem;
+  height: 100%;
+
+  background-color: aliceblue;
+  border-radius: 2rem;
+  border-color: darkgoldenrod;
+  border-style:groove;
+
+  box-shadow: 0 0 20px 2px darkgoldenrod;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.inputBox{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: .5rem;
+}
+
+.inputBox input{
+  position: relative;
+  width: 90%;
+  
+  border: none;
+  box-shadow: 0px 1.5px 0px 0px #858585;
+  padding: .5rem;
+  transition: all 200ms ease-in-out;
+  opacity: .8;
+  margin-right: .4rem;
+}
+
+.inputBox label{
+  font-size: .9rem;
+  font-family: doguitos;
+  font-weight: bold;
+  justify-content: left;
+  color: #6a6a6a;
+  margin-bottom: 4px;
+}
+
+.inputBox span{
+  color: #d00909;
+  font-size: .6rem;
+  margin-top: 6px;
+  
+  transition: all 100ms linear;
+}
+
+.inputBox input::placeholder{
+  color: rgb(145, 145, 145);
+  font-size: .75rem;
+}
+
+.inputBox input::after{
+  content: attr(placeholder);
+position: absolute;
+color: #161616;
+top: 0;
+left: 0;
+}
+
+.inputBox input:focus{
+  border: none;
+  box-shadow: 0px 1.5px 0px 0px #f4ac10;
+  outline: none;
+}
+
+.inputBox input:focus + .inputBox span{
+  visibility: visible;
+  transform: translateY(0rem);
+}
+
+.inputBox input:focus::placeholder{
+  visibility: hidden;
+}
+
+/*Para los min y max*/
+.minmax{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.minmax input{
+  width: 80%;
+  text-align: center;
+}
+
+/*Select y option*/
+
+.inputBox select{
+  width: 50%;
+  border: none;
+  box-shadow: 0px 1.5px 0px 0px #858585;
+  padding: .2rem;
+  opacity: .8;   
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.inputBox p{
+  display: inline;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  font-family: doguitos;
+  font-weight: 600;
+  color: rgb(145, 145, 145);
+  font-size: .9rem;
+  cursor: default;
+
+
+}
+
+.deleteTemp{
+  max-width: 3px;
+  height: 15px;
+  color: #d00909;
+  transform: translateY(-.5rem) translateX(-.2rem);
+  cursor: pointer;
+  margin: 0;
+  background: none;
+  border: none;
+}
+
+.submit{
+  margin: 1rem;
+
+  width: 4rem;
+
+  padding: 5px;
+
+  font-family: doguitos;
+  font-weight: bolder;
+
+  border-radius: 1rem;
+  border-color:rgb(181, 100, 2);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  background-color: rgb(254, 244, 224);
+}
+
+@media(max-width:450px){
+  .minmax input{
+      width: 50%;
+  }
+}
