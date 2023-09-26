@@ -1,6 +1,6 @@
 export const ADD_DOG = "ADD_DOG";
 export const GET_ALL_DOGS = "GET_ALL_DOGS";
-export const GET_QUERY_DOG = "GET_QUERY_DOG";
+export const GET_QUERY_DOGS = "GET_QUERY_DOGS";
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS";
 export const GET_DETAIL_DOG = "GET_DETAIL_DOG";
 export const FILTER_BY_TEMPERAMENTS = "FILTER_BY_TEMPERAMENTS";

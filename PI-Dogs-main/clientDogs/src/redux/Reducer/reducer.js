@@ -1,7 +1,7 @@
 import {
   ADD_DOG,
   GET_ALL_DOGS,
-  GET_QUERY_DOG,
+  GET_QUERY_DOGS,
   GET_TEMPERAMENTS,
   FILTER_BY_TEMPERAMENTS,
   FILTER_BY_ORIGIN,
@@ -14,11 +14,11 @@ import {
 } from "../actions-types";
 
 const initialState = {  
-  myDogs: [],
+  allDogs: [],
   loading: false,
   detail: {},
   temperaments: [],
-  allDogs:[],
+  allDogsCopy:[],
   
 };
 const reducer = (state = initialState, { type, payload }) => {
@@ -31,20 +31,26 @@ const reducer = (state = initialState, { type, payload }) => {
     case ADD_DOG: //Agrega la receta proporcionada en payload tanto a myRecipes como a allRecipes
       return {
         ...state,
-        myDogs: [...state.myDogs, payload],
-        allDogs: [...state.allDogs, payload]
+        allDogs: [...state.allDogs, payload],
+        allDogsCopy: [...state.allDogsCopy, payload]
       };
     case GET_ALL_DOGS: //Actualiza tanto myRecipes como allRecipes con las recetas proporcionadas en payload
       return {
         ...state,
-        myDogs: payload,
-        allDogs: payload
+        allDogs: payload,
+        allDogsCopy: payload
       };
-    case GET_QUERY_DOG: //Actualiza myRecipes con las recetas filtradas proporcionadas en payload
+    case GET_QUERY_DOGS: //Actualiza allDogs con los dogs filtradas proporcionadas en payload
       return {
         ...state,
-        myDogs: payload,
+        allDogs: payload,
       }
+      // {const allDogsFind = state.allDogs.filter(dog => dog.name.includes(payload))
+      // return{
+      //   ...state,
+      //   allDogs:
+      //   (payload === '')? state.allDogs : allDogsFind
+      // }}
     case GET_TEMPERAMENTS: //Actualiza diets con los tipos de dietas proporcionados en payload
       return {
         ...state,
@@ -56,60 +62,74 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         detail: payload,
       };
-    case FILTER_BY_TEMPERAMENTS: //Filtra las recetas en allRecipes basándose en el tipo de dieta proporcionado en payload y actualiza myRecipes con las recetas filtradas
-    
-      {
-        const allDogsFiltered = state.allDogs.filter(
-          (dog) => dog.temperaments.includes(payload)
-        );
+      case FILTER_BY_TEMPERAMENTS: 
+      { const AllDogsFiltered = state.allDogsCopy.filter( dog => dog.temperaments && dog.temperaments.includes(payload));
+        console.log(AllDogsFiltered)
+        console.log(state.allDogs)
         return {
-          ...state,
-          myDogs: allDogsFiltered,
-        };
+        
+        ...state,
+        allDogs:
+          (payload === 'All')
+          ? state.allDogsCopy
+          : AllDogsFiltered
+          
       }
+    }
     
         
-  
+
+      
+      // { const allDogs = state.allDogs
+      //   const originFilter = payload === 'Database' ? allDogs.filter(dog => dog.createdInDB) : allDogs.filter(dog => !dog.createdInDB)
+      // return {
+      //   ...state,
+      //   allDogs : payload === 'All'? allDogs : originFilter
+      // }}
+
+      case FILTER_BY_ORIGIN:{
+        const filteredDogs =
+          (payload === 'DataBase') 
+            ? state.allDogsCopy.filter(dog => dog.createdInDB)
+            : (payload === 'Api') 
+              ? state.allDogsCopy.filter(dog => !dog.createdInDB)
+              : state.allDogsCopy;
+      
+        console.log('Dogs after filter:', filteredDogs);
+      
+        return {
+          ...state,
+          allDogs: filteredDogs
+        };
+      }
+      
+      
+      
+       
+      
+      
     
     case ALPHABETIC_ORDER: //Ordena las recetas en myRecipes alfabéticamente según el criterio especificado en payload
       return {
         ...state,
-        myDogs:
+        allDogs:
           payload === "A-Z"
-            ? state.myDogs.sort((a, b) => a.name.localeCompare(b.name))
-            : state.myDogs.sort((a, b) => b.name.localeCompare(a.name)),
+            ? state.allDogs.sort((a, b) => a.name.localeCompare(b.name))
+            : state.allDogs.sort((a, b) => b.name.localeCompare(a.name)),
       };
     case WEIGHT_ORDER: //Ordena las recetas en myRecipes según la puntuación de salud en orden ascendente o descendente según el criterio especificado en payload
       return {
         ...state,
-        myDogs:
+        allDogs:
           payload === "Ascendente"
-            ? state.myDogs.sort((a, b) => (a.weight < b.weight ? -1 : 1))
-            : state.myDogs.sort((a, b) => (a.weight > b.weight ? -1 : 1)),
+            ? state.allDogs.sort((a, b) => (a.weight < b.weight ? -1 : 1))
+            : state.allDogs.sort((a, b) => (a.weight > b.weight ? -1 : 1)),
       };
-      case FILTER_BY_ORIGIN: //Filtra las recetas en allRecipes según el origen especificado en payload y actualiza myRecipes con las recetas filtradas
-         {
-        const filtered = state.allDogs.filter((dog) => {
-          const regExp = /^[0-9]+$/;
-          if (payload === 'Api' && regExp.test(dog.id)) {
-            return true;
-          } else if (payload === 'DataBase' && !regExp.test(dog.id)) {
-            return true;
-          } else {
-            return false;
-          }
-        });
-        return {
-          ...state,
-          myDogs: filtered
-        };
-      }
-      
-      
+     
     case DELETE_FILTERS: // Restablece myRecipes con todas las recetas en allRecipes
       return {
         ...state,
-        myDogs: state.allDogs
+        allDogs: state.allDogsCopy
       }
     case CLEAN_STATES: //Limpia el estado detail restableciéndolo a un objeto vacío
       return {

@@ -1,144 +1,143 @@
 
 
+body{
+  margin: 0;
+}
 
-/* GIF COOKING... */
+
+
+
+
+
+/* loader */
+
 .contenedor {
-    gap: 8px;
-    margin: 2%;
+    
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-/* FONDO DONDE VAN LOS BOTONES: ALL - ALL - A-Z - ASCENDENTE */
-.options {
-    display: flex;
-    justify-content: center;
-    width: auto;
+
+
+
+
+
+.options{
+  display: flex;
+  justify-content: center;
 }
 
-/* BOTONES: ALL - ALL - A-Z - ASCENDENTE */
+/* Estilos para los select */
 .options select {
-    margin-top: -10%;
-    margin-right: 50px;
-    margin-bottom: 10%;
-    background-color: #f7f7f7;
-    color: #424040;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    font-family: sans-serif;
-    font-style: normal;
-    border: #c8c8c8;
-    width: 100px;
+  
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
+  font-weight: 70; /* Ajusta el peso de la fuente según sea necesario */
+  letter-spacing: 1px; /* Ajusta el espacio entre letras según sea necesario */
+  height: 2rem;
+  font-size: 1rem; /* Ajusta el tamaño de la fuente según sea necesario */
+  padding: 0rem; /* Ajusta el relleno según sea necesario */
+  background-color: #FAFCFD;
+  border: 3px solid transparent;
+  transition: .3s ease-in-out;
+  margin-top: 1rem;
+  width: 140px; /* Ajusta el ancho según sea necesario */
+  margin-right: 50px;
+  border-radius: 4px 4px 4px 4px;
 }
 
-.options.weight{
-    margin-top: -10%;
-    margin-right: 100%;
-    margin-bottom: 10%;
-    background-color: #f7f7f7;
-    color: #424040;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    font-family: sans-serif;
-    font-style: normal;
-    border: #c8c8c8;
-    width: 9%;
+.options select.adap {
+  
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
+  font-weight: 70; /* Ajusta el peso de la fuente según sea necesario */
+  letter-spacing: 1px; /* Ajusta el espacio entre letras según sea necesario */
+  height: 2rem;
+  font-size: 1rem; /* Ajusta el tamaño de la fuente según sea necesario */
+  padding: 0rem; /* Ajusta el relleno según sea necesario */
+  background-color: #FAFCFD;
+  border: 3px solid transparent;
+  transition: .3s ease-in-out;
+  margin-top: 1rem;
+  width: 200px; /* Ajusta el ancho según sea necesario */
+  margin-right: 50px;
+
 }
 
-/* COLOR CUANDO TE POSICIONAS SOBRE LOS BOTONES: ALL - ALL - A-Z - ASCENDENTE */
-.options select:hover,
-select:focus-visible {
-    color: rgb(156, 147, 147);
-    background-color: #ffffff;
+
+
+
+.options select:focus {
+  box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.2);
+  outline: 0;
+  background-color: #bdac93;
+  color: #000;
 }
+
+.options select::placeholder {
+  color: #333;
+}
+
+.options select:hover {
+  background-color: #bdac93;
+  cursor: pointer;
+}
+
+/* Estilos para las opciones del select */
+.options select option {
+  color: #333;
+}
+
+.options select option:hover {
+  background-color: #bdac93;
+  cursor: pointer;
+}
+
+.options select:last-child {
+  margin-right: 0;
+}
+
 
 
 .reset {
-  align-items: center;
-  appearance: none;
+  padding: 10px;
+  font-size: 15px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 70;
+  color: #000;
   background-color: #fff;
-  border-radius: 24px;
-  border-style: none;
-  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
-  box-sizing: border-box;
-  color: #3c4043;
+  border: none;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
   cursor: pointer;
-  display: inline-flex;
-  fill: currentcolor;
-  font-family: "Google Sans",Roboto,Arial,sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  height: 48px;
-  justify-content: center;
-  letter-spacing: .25px;
-  line-height: normal;
-  max-width: 100%;
-  overflow: visible;
-  padding: 2px 24px;
-  position: relative;
-  text-align: center;
-  text-transform: none;
-  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  width: auto;
-  will-change: transform,opacity;
-  z-index: 0;
-  
+  outline: none;
+  width: 70px;
+  height: 40px;
+  margin-top: 12px;
 }
 
 .reset:hover {
-  background: #F6F9FE;
-  color: #174ea6;
+  background-color: #bdac93;
+  box-shadow: 0px 10px 10px #bdac93;
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .reset:active {
-  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
-  outline: none;
-}
-
-.reset:focus {
-  outline: none;
-  border: 2px solid #4285f4;
-}
-
-.reset:not(:disabled) {
-  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
-}
-
-.reset:not(:disabled):hover {
-  box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
-}
-
-.reset:not(:disabled):focus {
-  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
-}
-
-.reset:not(:disabled):active {
-  box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
-}
-
-.reset:disabled {
-  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+  transform: translateY(-1px);
 }
 
 
-/* COLOR QUE APARECE CUANDO TE COLOCAS SOBRE EL BOTON RESET */
-.options button:hover {
-    color: rgb(106, 98, 98);
-    background-color: #b4b4b4;
-}
 
-/* FONDO DONDE VAN LAS FLECHAS PARA PASAR DE PAGINA */
-.paginado {
-    background-color: green;
-    display:inline-flexbox;
-    justify-content:end;
-}
+
+
+
+
 
 /* fondo del loader */
 .loader {
@@ -151,8 +150,26 @@ select:focus-visible {
 
 }
 
-.loader img {
-    width: 40px;
-    height: 40px;
 
+
+.spaceCards{
+  height: 100%;
+  width: 96%;
+
+  justify-content: center;
+  align-items: center;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap:1rem;
+
+  margin: .5rem;
+  
+  justify-content: space-evenly;
+}
+
+.spacePagination{
+  height: 96%;
+  width: 96%;
 }

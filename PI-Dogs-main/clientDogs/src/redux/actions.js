@@ -6,11 +6,15 @@ import {
     WEIGHT_ORDER,
     ALPHABETIC_ORDER,
     GET_DETAIL_DOG,
+    GET_QUERY_DOGS,
     SET_LOADING,
     GET_TEMPERAMENTS,
     CLEAN_STATES,
 } from "./actions-types"
 import axios from "axios";
+
+
+
 
 export const setLoading = (isLoading) => { //para cambiar el estado de carga de la aplicacion
     return {
@@ -21,11 +25,11 @@ export const setLoading = (isLoading) => { //para cambiar el estado de carga de 
 export const addDog = (dog) => { //para agregar una nueva receta
     return async function (dispatch) {
         try {
-            const response = await axios.post("http://localhost:3001/dogs/", dog);
+            const response = await axios.post("http://localhost:3001/dogs/dogs", dog);
             return dispatch({ type: ADD_DOG, payload: response.data }); 
         } catch (error) {
             console.log(error.message);
-            alert("No se pudo crear receta");
+            alert(error.message);
         }
     };
 };
@@ -33,9 +37,9 @@ export const getAllDogs = () => { //funcion para obtener los perros
     return async function (dispatch) {
         try {
             dispatch(setLoading(true));
-            console.log('ejecutando action');
-            const response = await axios.get("http://localhost:3001/dogs/allDogs");
-            console.log('ejecutando action 2');
+            console.log('dogs obtenidos');
+            const response = await axios.get("http://localhost:3001/dogs/dogs");
+            
             dispatch({ type: GET_ALL_DOGS, payload: response.data });
             dispatch(setLoading(false));
         } catch (error) {
@@ -43,21 +47,21 @@ export const getAllDogs = () => { //funcion para obtener los perros
         }
     };
 };
-export const getQueryDog = (name) => { //para obtener recetas segun el nombre
+export const getQueryDog = (name) => { //para obtener dogs segun el nombre
     return async function (dispatch) {
         try {
             dispatch(setLoading(true));
             const response = await axios.get(
                 `http://localhost:3001/dogs/?name=${name}`
             );
-            dispatch({ type: GET_ALL_DOGS, payload: response.data });
+            dispatch({ type: GET_QUERY_DOGS, payload: response.data });
             dispatch(setLoading(false));
         } catch (error) {
             alert("No encontré el dog que estás buscando");
         }
     };
 };
-export const getDetail = (id) => { //para obtener los detalles de una receta segun su id
+export const getDetail = (id) => { //para obtener los detalles de una dog segun su id
     return async function (dispatch) {
         try {
             dispatch(setLoading(true));
@@ -65,7 +69,7 @@ export const getDetail = (id) => { //para obtener los detalles de una receta seg
             dispatch({ type: GET_DETAIL_DOG, payload: response.data });
             dispatch(setLoading(false));
         } catch (error) {
-            alert("No existe la receta con el ID indicado");
+            alert("The dog with the requested id does not exist");
         }
     };
 };
@@ -83,7 +87,7 @@ export const getTemperaments = () => { //para obtener los tipos de dietas dispon
 export const filterDogsByTemperaments = (temperament) => { //para filtrar las recetas por tipos de dieta
     return {
         type: FILTER_BY_TEMPERAMENTS,
-        payload: temperament,
+        payload:temperament,
     };
 };
 export const orderDogsAlphabetic = (option) => { //para ordenar las recetas alfabeticamente

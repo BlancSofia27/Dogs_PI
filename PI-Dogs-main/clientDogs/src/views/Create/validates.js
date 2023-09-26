@@ -1,4 +1,4 @@
-export default function validate(newDog){
+export default function validate(newDog, allDogsCopy){
     let errors={}
 
     //Validaciones regex
@@ -11,7 +11,11 @@ export default function validate(newDog){
         errors.name="Name is required."
     }else if(!noNumeros.test(newDog.name)){
         errors.name="The name must not contain numbers."
-    }else errors.name=null
+    }
+    // }else if (allDogsCopy.find(dog => dog.name === newDog.name)) {
+    //         errors.name = "Name already exists.";
+    // }
+    else errors.name=null
 
     //Errores en image
     if(!newDog.image){
@@ -85,10 +89,10 @@ export default function validate(newDog){
         }else errors.max_lifeSpan=null
     }
 
-    //errores en temperaments
-    if(!newDog.temperaments){
-        errors.temperaments ='Select the least one temperament for your dog';
-    }else errors.temperaments=null
+    // //errores en temperaments
+    // if(!newDog.temperaments){
+    //     errors.temperaments ='Select the least one temperament for your dog';
+    // }else errors.temperaments=null
 
     return errors
 }

@@ -7,7 +7,7 @@ const Cards = ({info}) => {
   return (
     <div className={styles.Cont}>
         {
-            info?.map((dog)=> <Card name={dog.name} image={dog.image} weight={dog.weight} temperament={dog.temperament}/>)
+            info?.map((dog)=> )
         }
     </div>
   )

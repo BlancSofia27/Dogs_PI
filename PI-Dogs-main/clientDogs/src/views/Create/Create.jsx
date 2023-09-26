@@ -10,13 +10,13 @@ import styles from './create.module.css'
 import NavBar from '../../components/NavBar/NavBar'
 
 export default function Create(){
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const dispatch = useDispatch();//configuro el dispatch
+    const navigate = useNavigate();//configuro navigate
 
     
 
-    //Traigo los temperamentos del estado Global
-    const Temperaments = useSelector((state) => state.temperaments); 
+    //Traigo los temperamentos del estado Globalen mi reducer y los guardo en una constante
+    const {temperaments, allDogsCopy} = useSelector((state) => state); 
   
     //Creo un estado Local para los inputs del form
     const [newDog, setNewDog] = useState({
@@ -37,26 +37,28 @@ export default function Create(){
 
     //Creo un estado Local para los errors
     const [errors, setErrors] = useState({
-        name:'dogs name is required',
-        image:'enter a url',
+        name:'',//agrego algunos mensajes por defecto
+        image:'',
         min_lifeSpan:'',
         max_lifeSpan:'',
         min_weight: '',
         max_weight: '',
         min_height: '',
         max_height: '',
-        temperaments:'Select the least one temperament for your dog'
+        temperaments:''
     });
     
 
-    //Para renderizar los temperamentos
+    //uso useEffect para renderizar los temperamentos al cargarse la pagina
     useEffect(()=>{
-        dispatch(getTemperaments())
+        dispatch(getTemperaments())//mediante una action
     },[dispatch]);
 
+
+    //funcion para guardar los cambios constantemente
     function handleChange(e){
         e.preventDefault();
-        //Para guardar los inputs
+        //Para guardar los inputs de mi dog
         setNewDog({
             ...newDog,
             [e.target.name]: e.target.value
@@ -69,7 +71,7 @@ export default function Create(){
         }));
     }
 
-    //Para el select de los temperamentos
+    //funcion para seleccionar los temperamentos
     function handleTemperament(e){
         e.preventDefault();
         const selectedTemperament=e.target.value;
@@ -91,7 +93,9 @@ export default function Create(){
           }
     }
 
-    //Para eliminar algun temperamento que agregue por error
+    
+
+    //funcion para eliminar algun temperamento que agregue por error
     function handleTemperamentDelete(temperaments){
         const updatedTemperaments = newDog.temperaments.filter((temp) => temp !== temperaments);
         setNewDog({
@@ -105,13 +109,15 @@ export default function Create(){
     function handleSubmit(e){
         e.preventDefault();
 
-        if(!errors.name&&!errors.image&&!errors.min_lifeSpan&&!errors.max_lifeSpan&&!errors.min_weight&&!errors.max_weight&&!errors.min_height&&!errors.max_height&&!errors.temperaments){
+        if(!errors.name&&!errors.image&&!errors.min_lifeSpan&&!errors.max_lifeSpan&&!errors.min_weight&&//valido que no haya errores
+            !errors.max_weight&&!errors.min_height&&!errors.max_height
+             ){
 
-            dispatch(addDog(newDog));
+            dispatch(addDog(newDog));//mediante el dispatch uso la action addDog y le mando mi newDog
+            alert('dog created successfully!')
             
-            alert('Dog created successfully!');
     
-            setNewDog({
+            setNewDog({//seteo newDog de 0
               name: '',
               image:'',   
               min_lifeSpan:'',
@@ -125,7 +131,7 @@ export default function Create(){
 
             //Me redirige a home
             navigate('/home');
-        } else alert('Data is missing or incorrect!')
+        } 
     }
 
     return(
@@ -210,27 +216,41 @@ export default function Create(){
                    
                     <select onChange={(e) => handleTemperament(e)} defaultValue={""}>
                         <option value='' disabled>Select temperaments</option>
-                            {Temperaments.map((temperament) => (
+                            {temperaments.map((temperament) => (// mapeo los temperaments para mostrar las opciones
                                 <option key={temperament} value={temperament.name}>
                                     {temperament.name}
-                                </option> 
+                                </option> //muestro la propiedad temperament.name 
                             ))}
                     </select>
                             
-                    {newDog.temperaments.length > 0 && (
+                    {newDog.temperaments.length > 0 && (//condicional para cuando se agregue un temperament muestro los seleccionados
                      <div>
                         <label>Selected temperaments: </label>
-                        {newDog.temperaments.map((temp, index) => (
+                        {newDog.temperaments.map((temp, index) => (//los mapeo y agrego handleTemperamentDelete para eliminarlos si quisiera en un button dentro de p
                             <p key={index}> {index===0 ?temp: `, ${temp}`} <button className={styles.deleteTemp} type='button' onClick={() => handleTemperamentDelete(temp)}>x</button></p>
                         ))}
                      </div>
                     )}
                     {errors.temperaments && (
-                                <span className="error">{errors.temperaments}</span>
+                                <span className="error">{errors.temperaments}</span>// aca muestro un mensaje en caso de que no haya seleccionados
                             )}
                 </div>
-
-                <button type="submit" className={styles.submit}>Create Dog!</button>
+                {!errors.name &&// condicional para validar que no haya errores
+          !errors.image &&
+          !errors.min_height &&
+          !errors.max_height &&
+          !errors.min_weight &&
+          !errors.max_weight &&
+          !errors.min_lifeSpan &&
+          !errors.max_lifeSpan &&
+          newDog.temperaments.length > 0 ? (
+          <button type='submit'   className={styles.createButton}>Create Dog!</button>// si no los hay agrego un button funcional para crear el dog 
+        ) : (
+            //si hay algun error renderizo un falso button de create
+          <button disabled className={styles.disabledButton}>
+            Create Dog!
+          </button>
+        )}
             </form>
         </div>
     )
