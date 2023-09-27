@@ -11,12 +11,13 @@ import {
   GET_DETAIL_DOG,
   CLEAN_STATES,
   DELETE_FILTERS,
+  GET_STATE_DOGS,
 } from "../actions-types";
 
 const initialState = {  
   allDogs: [],
   loading: false,
-  detail: {},
+  detail: [],
   temperaments: [],
   allDogsCopy:[],
   
@@ -28,18 +29,23 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: payload,
       };
-    case ADD_DOG: //Agrega la receta proporcionada en payload tanto a myRecipes como a allRecipes
+    case ADD_DOG: //Agrega el dog proporcionado en payload tanto a allDogs como a allDogsCopy
       return {
         ...state,
         allDogs: [...state.allDogs, payload],
         allDogsCopy: [...state.allDogsCopy, payload]
       };
-    case GET_ALL_DOGS: //Actualiza tanto myRecipes como allRecipes con las recetas proporcionadas en payload
+    case GET_ALL_DOGS: //Actualiza tanto allDogs como allDogsCopy con los dogs proporcionadas en payload
       return {
         ...state,
         allDogs: payload,
         allDogsCopy: payload
       };
+    case GET_STATE_DOGS:
+      return{
+        ...state,
+        allDogs:payload
+      } 
     case GET_QUERY_DOGS: //Actualiza allDogs con los dogs filtradas proporcionadas en payload
       return {
         ...state,
@@ -62,46 +68,39 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         detail: payload,
       };
-      case FILTER_BY_TEMPERAMENTS: 
-      { const AllDogsFiltered = state.allDogsCopy.filter( dog => dog.temperaments && dog.temperaments.includes(payload));
-        console.log(AllDogsFiltered)
-        console.log(state.allDogs)
-        return {
-        
-        ...state,
-        allDogs:
-          (payload === 'All')
-          ? state.allDogsCopy
-          : AllDogsFiltered
-          
-      }
-    }
-    
-        
-
       
-      // { const allDogs = state.allDogs
-      //   const originFilter = payload === 'Database' ? allDogs.filter(dog => dog.createdInDB) : allDogs.filter(dog => !dog.createdInDB)
-      // return {
-      //   ...state,
-      //   allDogs : payload === 'All'? allDogs : originFilter
-      // }}
-
-      case FILTER_BY_ORIGIN:{
-        const filteredDogs =
-          (payload === 'DataBase') 
-            ? state.allDogsCopy.filter(dog => dog.createdInDB)
-            : (payload === 'Api') 
-              ? state.allDogsCopy.filter(dog => !dog.createdInDB)
-              : state.allDogsCopy;
+       
+      case FILTER_BY_ORIGIN: {
+        const filteredDogsByOrigin = state.allDogsCopy.filter(dog => {
+          if (payload === 'DataBase') {
+            return dog.createdInDB === true;
+          } else if (payload === 'Api') {
+            return dog.createdInDB !== true;
+          } else {
+            return true;
+          }
+        });
       
-        console.log('Dogs after filter:', filteredDogs);
+        console.log('Dogs after origin filter:', filteredDogsByOrigin);
       
         return {
           ...state,
-          allDogs: filteredDogs
+          allDogs: filteredDogsByOrigin // Actualiza allDogs con los perros filtrados por origen
         };
       }
+      
+      case FILTER_BY_TEMPERAMENTS: {
+        const filteredDogsByTemperaments = state.allDogsCopy.filter(dog => dog.temperaments && dog.temperaments.includes(payload));
+        console.log('Dogs after temperament filter:', filteredDogsByTemperaments);
+      
+        return {
+          ...state,
+          allDogs: (payload === 'All')
+            ? state.allDogsCopy
+            : filteredDogsByTemperaments // Actualiza allDogs con los perros filtrados por temperamentos
+        };
+      }
+      
       
       
       
@@ -134,7 +133,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case CLEAN_STATES: //Limpia el estado detail restableciéndolo a un objeto vacío
       return {
         ...state,
-        detail: {}
+        detail: []
       };
     default:
       return { ...state };

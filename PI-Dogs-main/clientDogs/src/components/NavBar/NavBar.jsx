@@ -14,6 +14,9 @@ export default function NavBar(props) {
             <div className={styles.logoCont}>
             <img src={logo} alt='toHome' className={styles.logoDog} />
             <h2 className={styles.textDog}>Dogs Company</h2>
+            <NavLink to='/Landing'>
+         <button className={styles.back}>⇦Landing</button>
+       </NavLink>
             </div>
             <nav>
             <div className={styles.newDogDiv}>

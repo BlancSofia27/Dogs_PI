@@ -35,7 +35,7 @@ export default function SearchBar(props) {
         <div >
             <div className={styles.searchBox}>
                 <input className={styles.searchInput} type="text" name='search' placeholder="Dog" value={input} onChange={handlerInput} onKeyDown={handleKeyPress} autoComplete="off" />
-                <button className={styles.searchButton} onClick={searchHandler} value={input}>Search</button>
+                <button className={styles.searchButton} onClick={searchHandler} value={input}>Search🔍</button>
                 
             </div>
         </div>

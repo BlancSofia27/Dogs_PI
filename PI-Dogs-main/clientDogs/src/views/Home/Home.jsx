@@ -16,12 +16,12 @@ import Pagination from "../../components/Pagination/Pagination"
 import NavBar from "../../components/NavBar/NavBar";
 import Card from "../../components/Card/Card"
 import styles from './Home.module.css'
-
+import { NavLink } from "react-router-dom";
 export default function HomePage() {
 
 
   
-  const {  temperaments, allDogsCopy, allDogs} = useSelector( (state) => state);
+  const {  temperaments, allDogs} = useSelector( (state) => state);
   //const {allDogs} = useSelector((state) => state.allDogs)
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,7 +40,7 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(getAllDogs());
-    dispatch(cleanStates())
+    dispatch(cleanStates)
   }, [dispatch]);
   useEffect(() => {
     if (!temperaments.length) {
@@ -85,7 +85,10 @@ export default function HomePage() {
   return (
     <div>
       <NavBar  />
+      
+           
       <div className={styles.options}>
+      
       <select name='Origin' onChange={filterHandler} defaultValue='Filter By Origin'>
           <option disabled >Filter By</option>
           <option value="All">All</option>
@@ -121,11 +124,12 @@ export default function HomePage() {
       dogsPerPage={dogsPerPage}
       allDogs={allDogs.length}
       paginado={paginado}
+      currentPage={currentPage}
         />
       {currentDogs?.map((dog) => {
         return (
-          <div key={dog}>
-             <Card name={dog.name} image={dog.image} weight={dog.weight} temperaments={dog.temperaments}/>
+          <div key={dog.id}>
+             <Card name={dog.name} image={dog.image} weight={dog.weight} temperaments={dog.temperaments} id={dog.id} createdInDB={dog.createdInDB}/>
           </div>
         );
             })} 

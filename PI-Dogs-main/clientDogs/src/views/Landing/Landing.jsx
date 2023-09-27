@@ -1,15 +1,15 @@
 
 import { NavLink } from "react-router-dom";
-
+import styles from './Landing.module.css'
 export default function LandingPage() {
   return (
-    <div className='styles.landing'>
-      <div className='container'>
-        <h1>Find thousands of recipes!</h1>
+    
+      <div className={styles.landingContainer}>
+        <h1 className={styles.landingText}>go to home</h1>
         <NavLink to="/home">
-          <button>go</button>
+          <a className={styles.landingButton}>go</a>
         </NavLink>
       </div>
-    </div>
+    
   );
 }

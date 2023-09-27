@@ -10,6 +10,7 @@ import {
     SET_LOADING,
     GET_TEMPERAMENTS,
     CLEAN_STATES,
+    GET_STATE_DOGS,
 } from "./actions-types"
 import axios from "axios";
 
@@ -36,26 +37,33 @@ export const addDog = (dog) => { //para agregar una nueva receta
 export const getAllDogs = () => { //funcion para obtener los perros
     return async function (dispatch) {
         try {
-            dispatch(setLoading(true));
+            
             console.log('dogs obtenidos');
             const response = await axios.get("http://localhost:3001/dogs/dogs");
             
             dispatch({ type: GET_ALL_DOGS, payload: response.data });
-            dispatch(setLoading(false));
+            
         } catch (error) {
             console.log("dogs not found");
         }
     };
 };
+export const getStateDogs = (dogs) =>{
+    return {
+        type: GET_STATE_DOGS,
+        payload:dogs
+    }
+};
+
 export const getQueryDog = (name) => { //para obtener dogs segun el nombre
     return async function (dispatch) {
         try {
-            dispatch(setLoading(true));
+           
             const response = await axios.get(
                 `http://localhost:3001/dogs/?name=${name}`
             );
             dispatch({ type: GET_QUERY_DOGS, payload: response.data });
-            dispatch(setLoading(false));
+            
         } catch (error) {
             alert("No encontré el dog que estás buscando");
         }
@@ -64,10 +72,11 @@ export const getQueryDog = (name) => { //para obtener dogs segun el nombre
 export const getDetail = (id) => { //para obtener los detalles de una dog segun su id
     return async function (dispatch) {
         try {
-            dispatch(setLoading(true));
+           
             const response = await axios.get(`http://localhost:3001/dogs/${id}`);
             dispatch({ type: GET_DETAIL_DOG, payload: response.data });
-            dispatch(setLoading(false));
+            
+            console.log('estamos en el detail')
         } catch (error) {
             alert("The dog with the requested id does not exist");
         }

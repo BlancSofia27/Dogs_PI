@@ -10,3 +10,4 @@ export const WEIGHT_ORDER = "WEIGHT_ORDER";
 export const SET_LOADING = "SET_LOADING";
 export const CLEAN_STATES = "CLEAN_STATES";
 export const DELETE_FILTERS = "DELETE_FILTERS";
+export const GET_STATE_DOGS = 'GET_STATE_DOGS'

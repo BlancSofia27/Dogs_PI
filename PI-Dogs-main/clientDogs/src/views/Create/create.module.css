@@ -8,31 +8,25 @@
   flex-direction: column;
   align-items: center;
 
-  background-color: rgba(100, 100, 99, 0.385);
-  background-image: url('../../images/bone.svg');
+  background-color:#51452e;
+  
 }
 
-.layout h1{
-  font-family: doguitos;
-  font-weight: bolder;
-  margin-bottom: 0;
+.firstText{
+
 }
+
+
 
 .form{
-  width: 80%;
+  width: 1000px;
   max-width: 30rem;
   height: 100%;
-
   background-color: aliceblue;
   border-radius: 2rem;
-  border-color: darkgoldenrod;
-  border-style:groove;
-
-  box-shadow: 0 0 20px 2px darkgoldenrod;
-
+  box-shadow: 0 0 20px 2px rgb(156, 154, 154);
   display: flex;
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
 }
@@ -51,7 +45,7 @@
   width: 90%;
   
   border: none;
-  box-shadow: 0px 1.5px 0px 0px #858585;
+  box-shadow: 0px 1.5px 0px 0px #554848;
   padding: .5rem;
   transition: all 200ms ease-in-out;
   opacity: .8;
@@ -60,17 +54,17 @@
 
 .inputBox label{
   font-size: .9rem;
-  font-family: doguitos;
+  
   font-weight: bold;
   justify-content: left;
-  color: #6a6a6a;
+  color: #5e5b5b;
   margin-bottom: 4px;
 }
 
 .inputBox span{
-  color: #d00909;
-  font-size: .6rem;
-  margin-top: 6px;
+  color: #c31515;
+  font-size: .9rem;
+  margin-top: 20px;
   
   transition: all 100ms linear;
 }
@@ -90,7 +84,7 @@ left: 0;
 
 .inputBox input:focus{
   border: none;
-  box-shadow: 0px 1.5px 0px 0px #f4ac10;
+  box-shadow: 0px 1.5px 0px 0px #ffffff;
   outline: none;
 }
 
@@ -140,6 +134,21 @@ left: 0;
 
 }
 
+.errorAdap{
+
+  font-size: 14px;
+  margin-top: 3px;
+  color: #c31515
+}
+
+.errorAdapDiv{
+  margin-left: -40px;
+  
+  align-items: center;
+  display:inline;
+  padding-left: 30px;
+}
+
 .deleteTemp{
   max-width: 3px;
   height: 15px;
@@ -156,21 +165,94 @@ left: 0;
   width: 100%;
   font-size: 25px;
   left: 50%;
+  color: rgb(70, 222, 70);
+  background-color: rgb(103, 243, 103);
   
 }
 
-/* COLOR  DEL BOTON CREATE */
+
 .disabledButton {
-  background-color: rgb(213, 207, 207);
   border-radius: 10px;
-  width: fit-content;
-  font-size: 15px;
-  margin-left: 35%;
-  color: rgb(54, 51, 51);
+  width: 100%;
+  font-size: 25px;
+  left: 50%;
 }
+
+
 
 @media(max-width:450px){
   .minmax input{
       width: 50%;
   }
 }
+
+.validateButton {
+  padding: 10px;
+  font-size: 15px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 70;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  width: 170px;
+  height: 40px;
+  text-align: center;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 10px;
+  
+  
+}
+
+.validateButton:hover {
+  background-color: #bdac93;
+  box-shadow: 0px 5px 10px #bdac93;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.validateButton:active {
+  transform: translateY(-1px);
+}
+
+.back {
+  padding: 10px;
+  font-size: 15px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 70;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  width: 80px;
+  height: 40px;
+  margin-top: 12px;
+  margin-left: 0px;
+}
+
+.back:hover {
+  background-color: #bdac93;
+  box-shadow: 0px 10px 10px #bdac93;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.back:active {
+  transform: translateY(-1px);
+}
+
+
+

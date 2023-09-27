@@ -1,22 +1,22 @@
 import React from 'react';
 import styles from './Card.module.css'
-import { useNavigate } from 'react-router-dom'
+
+import { Link } from 'react-router-dom';
 
 
-export default function Card(dog) {
-    const {id, name, image, weight, temperaments} = dog;
-    const navigate = useNavigate();
+export default function Card(props) {
+    const {id, name, image, weight, temperaments} = props
     
+    console.log(props)
 
-    const toDetail = () => {
-        navigate(`/dogs/${dog.id}`)
-    }
+     
+   
     
 
     return (
         <div key={id} className={styles.card} >
             <div className={styles.frontFace}>
-            <img src={image} alt={name} className={styles.img} onClick={toDetail}/>
+            <img src={image} alt={name} className={styles.img} />
             </div>
             
             <div className={styles.backFace}>
@@ -26,7 +26,7 @@ export default function Card(dog) {
                 Temperaments:{temperaments}
             </div>
             <div className={styles.divMoreInfo}>
-                <button onClick={toDetail} className={styles.moreInfo}>More info </button>
+                <Link to={`/detail/${id}`} className={styles.moreInfo}>More info </Link>
             </div>
             </div>
         </div>
